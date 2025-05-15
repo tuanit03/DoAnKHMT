@@ -1,0 +1,141 @@
+/* src/styles/HDFSBlocks.css */
+.hdfs-blocks {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.hdfs-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 1rem;
+  margin-bottom: 1rem;
+}
+
+.hdfs-header h2 {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+.time-range-selector select {
+  padding: 0.5rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background-color: white;
+  font-size: 0.9rem;
+}
+
+.blocks-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.blocks-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.blocks-table th {
+  background-color: #f5f5f5;
+  padding: 0.75rem 0.5rem;
+  text-align: left;
+  border-bottom: 2px solid #ddd;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.blocks-table td {
+  padding: 0.6rem 0.5rem;
+  border-bottom: 1px solid #eee;
+}
+
+.blocks-table tr {
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.blocks-table tr:hover {
+  background-color: #f9f9f9;
+}
+
+.blocks-table tr.selected {
+  background-color: #f0f7ff;
+}
+
+.log-level-badge {
+  display: inline-block;
+  padding: 0.2rem 0.4rem;
+  border-radius: 3px;
+  color: white;
+  font-size: 0.8rem;
+  margin-right: 0.25rem;
+}
+
+.component-badge {
+  display: inline-block;
+  padding: 0.2rem 0.4rem;
+  background-color: #e9ecef;
+  border-radius: 3px;
+  font-size: 0.8rem;
+  margin-right: 0.25rem;
+  margin-bottom: 0.25rem;
+}
+
+.components-list {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 200px;
+}
+
+.block-logs {
+  margin-top: 1rem;
+  padding: 0 1rem;
+  flex: 1;
+  overflow-y: auto;
+  border-top: 1px solid #eee;
+}
+
+.block-logs h3 {
+  font-size: 1.1rem;
+  margin: 1rem 0;
+}
+
+.logs-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.log-entry {
+  padding: 0.5rem;
+  background-color: #f9f9f9;
+  border-radius: 4px;
+}
+
+.log-date {
+  font-size: 0.8rem;
+  color: #666;
+  margin-bottom: 0.25rem;
+}
+
+.log-message {
+  font-family: monospace;
+  word-break: break-all;
+}
+
+.loading, .error, .no-blocks, .no-logs {
+  padding: 2rem;
+  text-align: center;
+  color: #666;
+  font-style: italic;
+}
+
+.error {
+  color: #dc3545;
+}

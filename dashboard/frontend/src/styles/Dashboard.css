@@ -1,0 +1,118 @@
+/* src/styles/Dashboard.css */
+.dashboard {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background-color: #f8f9fa;
+}
+
+.dashboard-header {
+  background-color: #3f51b5;
+  color: white;
+  padding: 1rem 0;
+  text-align: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.dashboard-title {
+  font-weight: bold !important;
+}
+
+.dashboard-container {
+  padding: 1.5rem !important;
+  flex: 1;
+  overflow: hidden;
+}
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: 1.5rem;
+  height: calc(100vh - 80px);
+}
+
+.grid-item {
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  transition: all 0.3s ease;
+  padding: 0; /* Remove padding to give more space to the chart content */
+  position: relative;
+}
+
+/* Make sure content fills available space */
+.log-viewer, .statistics-counter, .anomaly-list, .time-series-chart {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  overflow: hidden;
+}
+
+.grid-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Grid positioning for the 4 quadrants */
+.quadrant-1 {
+  grid-column: 1 / 2;
+  grid-row: 1 / 2;
+}
+
+.quadrant-2 {
+  grid-column: 2 / 3;
+  grid-row: 1 / 2;
+}
+
+.quadrant-3 {
+  grid-column: 1 / 2;
+  grid-row: 2 / 3;
+}
+
+.quadrant-4 {
+  grid-column: 2 / 3;
+  grid-row: 2 / 3;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1200px) {
+  .dashboard-grid {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto;
+    gap: 1rem;
+  }
+  
+  .quadrant-1, .quadrant-2, .quadrant-3, .quadrant-4 {
+    height: 50vh;
+  }
+}
+
+@media (max-width: 768px) {
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(4, minmax(300px, auto));
+    gap: 1rem;
+  }
+  
+  .quadrant-1 {
+    grid-column: 1;
+    grid-row: 1 / 2;
+  }
+  
+  .quadrant-2 {
+    grid-column: 1;
+    grid-row: 2 / 3;
+  }
+  
+  .quadrant-3 {
+    grid-column: 1;
+    grid-row: 3 / 4;
+  }
+  
+  .quadrant-4 {
+    grid-column: 1;
+    grid-row: 4 / 5;
+  }
+}
