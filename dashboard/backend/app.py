@@ -3,13 +3,18 @@ import logging
 from fastapi import FastAPI, APIRouter
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.ext.asyncio import AsyncSession
-
+import os
 import config
 from database import Base, engine, get_db, AsyncSessionLocal
-from routes import logs, statistics, anomalies, hdfs
+from routes import logs, statistics, anomalies, hdfs, test_reports
 from services.kafka_consumer import KafkaConsumerService
 from services.mock_data import MockDataGenerator
 from services.db_service import DBService
+
+from fastapi.staticfiles import StaticFiles
+from pathlib import Path
+
+
 
 # Configure logging
 logging.basicConfig(
@@ -45,6 +50,19 @@ app.include_router(logs.router, prefix=config.API_PREFIX)
 app.include_router(statistics.router, prefix=config.API_PREFIX)
 app.include_router(anomalies.router, prefix=config.API_PREFIX)
 app.include_router(hdfs.router, prefix=config.API_PREFIX)
+app.include_router(test_reports.router, prefix=config.API_PREFIX)
+
+# Mount the reports directory to serve HTML files
+ROOT_DIR = Path(__file__).parent.parent
+REPORTS_DIR = ROOT_DIR / "reports"  # Path to reports directory
+# Check if we're running in Docker container
+if os.path.exists('/app/reports'):
+    REPORTS_DIR = Path("/app/reports")  # Use absolute path for Docker container
+app.mount("/reports", StaticFiles(directory=REPORTS_DIR, html=True), name="reports")
+
+@app.get("/")
+async def root():
+    return {"message": "API Monitor Backend is running"}
 
 
 # Create services

@@ -16,7 +16,7 @@ const api = axios.create({
     'Content-Type': 'application/json',
   },
   // Add timeout and handle proxy redirects properly
-  timeout: 10000,
+  timeout: 30000,
   maxRedirects: 5,
 });
 
@@ -79,4 +79,40 @@ export const fetchSummaryStatistics = async (params) => {
   return response.data;
 };
 
+/**
+ * List all available API test reports
+ * @returns {Promise} API response with list of report files
+ */
+export const fetchTestReports = async () => {
+  const response = await api.get('/api/test-reports/list');
+  return response.data;
+};
+
+/**
+ * Get the latest API test report
+ * @returns {Promise} API response with latest report info
+ */
+export const fetchLatestTestReport = async () => {
+  const response = await api.get('/api/test-reports/latest');
+  return response.data;
+};
+
+/**
+ * Run API tests and generate a new report
+ * @returns {Promise} API response with test results and new report info
+ */
+export const runApiTests = async () => {
+  // Create a custom instance with longer timeout for this specific call
+  const response = await axios({
+    method: 'post',
+    url: `${normalizedBaseUrl}/api/test-reports/run`,
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    timeout: 60000, // Increase timeout to 60 seconds for this call
+  });
+  return response.data;
+};
+
+// Keep other functions as they are...
 export default api;

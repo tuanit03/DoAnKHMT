@@ -109,7 +109,7 @@ services:
       timeout: 5s
       retries: 5
   
-  # === BACKEND API ===
+  # === BACKEND API ===  
   backend:
     build:
       context: ./dashboard/backend
@@ -132,6 +132,9 @@ services:
       - MOCK_DATA_ENABLED=True
       - MOCK_DATA_INTERVAL_SECONDS=5
       - CORS_ORIGINS=http://localhost:3000,http://frontend:80,http://localhost,http://localhost:80,http://127.0.0.1:3000
+    volumes:
+      - ./dashboard/test_api:/app/test_api
+      - ./dashboard/reports:/app/reports
     networks:
       - anomaly-net
     depends_on:
